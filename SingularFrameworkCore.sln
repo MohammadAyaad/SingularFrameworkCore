@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingularFrameworkCore", "SingularFrameworkCore\SingularFrameworkCore.csproj", "{0372D147-2DF0-454B-AF87-744C1B2BC663}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingularFrameworkCore.Integration.Repository.Files", "SingularFrameworkCore.Integration.Repository.Files\SingularFrameworkCore.Integration.Repository.Files.csproj", "{9D2B71E3-C618-4F0E-B1ED-136A1DBFC088}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{0372D147-2DF0-454B-AF87-744C1B2BC663}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0372D147-2DF0-454B-AF87-744C1B2BC663}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0372D147-2DF0-454B-AF87-744C1B2BC663}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D2B71E3-C618-4F0E-B1ED-136A1DBFC088}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D2B71E3-C618-4F0E-B1ED-136A1DBFC088}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D2B71E3-C618-4F0E-B1ED-136A1DBFC088}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D2B71E3-C618-4F0E-B1ED-136A1DBFC088}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
