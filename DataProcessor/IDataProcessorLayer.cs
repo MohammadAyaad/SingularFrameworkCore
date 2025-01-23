@@ -1,9 +1,7 @@
 namespace SingularFrameworkCore.DataProcessor;
 
-public interface IDataProcessorLayer<I, O>
+public interface IDataProcessorLayer<T>
 {
-    I InputPreProcess(I input);
-    O InputPostProcess(O input);
-    I OutputPostProcessor(I input);
-    O OutputPreProcessor(O input);
+    T Process(T input);
+    T Reverse(T input);
 }
