@@ -1,18 +1,18 @@
-﻿using SingularFrameworkCore.DataProcessor;
+using SingularFrameworkCore.DataProcessor;
 using SingularFrameworkCore.Repository;
 using SingularFrameworkCore.Serialization;
 
 namespace SingularFrameworkCore;
 
-public class Singular<I, O> : ISingularCrudRepository<I>
+public class SingularAsync<I, O> : ISingularCrudAsyncRepository<I>
 {
-    private ISingularCrudRepository<O> _repository;
+    private ISingularCrudAsyncRepository<O> _repository;
     private IEntitySerializer<I, O> _serializer;
     public List<IDataProcessorLayer<I>> _preProcessors;
     public List<IDataProcessorLayer<O>> _postProcessors;
 
-    public Singular(
-        ISingularCrudRepository<O> repository,
+    public SingularAsync(
+        ISingularCrudAsyncRepository<O> repository,
         IEntitySerializer<I, O> serializer,
         List<IDataProcessorLayer<I>> preProcessors,
         List<IDataProcessorLayer<O>> postProcessors
@@ -54,23 +54,23 @@ public class Singular<I, O> : ISingularCrudRepository<I>
         return s;
     }
 
-    public virtual void Create(I entity)
+    public virtual async Task Create(I entity)
     {
-        _repository.Create(this.OutputPipeline(entity));
+        await _repository.Create(this.OutputPipeline(entity));
     }
 
-    public virtual I Read()
+    public virtual async Task<I> Read()
     {
-        return this.InputPipeline(_repository.Read());
+        return this.InputPipeline(await _repository.Read());
     }
 
-    public virtual void Update(I newEntity)
+    public virtual async Task Update(I newEntity)
     {
-        _repository.Update(this.OutputPipeline(newEntity));
+        await _repository.Update(this.OutputPipeline(newEntity));
     }
 
-    public virtual void Delete()
+    public virtual async Task Delete()
     {
-        _repository.Delete();
+        await _repository.Delete();
     }
 }

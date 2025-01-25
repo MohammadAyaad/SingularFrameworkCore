@@ -2,8 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
+    <PackageId>SingularFrameworkCore</PackageId>
+    <Version>0.1.0-alpha</Version>
+    <Authors>Mohammad Ayaad</Authors>
+    <Description></Description>
+    <PackageLicenseExpression>Apache License 2.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/MohammadAyaad/SingularFrameworkCore</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/MohammadAyaad/SingularFrameworkCore</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>Singular</PackageTags>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
 
 </Project>
