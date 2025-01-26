@@ -207,15 +207,14 @@ public
 
 class Program
 {
-    static Singular<MyClass,string>
     static void Main()
     {
         // Create an instance of Singular for MyClass objects stored as strings
         var singular = new Singular<MyClass, string>(
-            new TextFileRepository("test.json"),
-            new NewtonsoftJsonStringSerializer<MyClass>(),
-            new List<IDataProcessorLayer<MyClass>>(),
-            new List<IDataProcessorLayer<string>>()
+            new TextFileRepository("test.json"), // Our Target Text File Storage
+            new NewtonsoftJsonStringSerializer<MyClass>(), // Our Json string serializer
+            new List<IDataProcessorLayer<MyClass>>(), // The Pre-Processor layers
+            new List<IDataProcessorLayer<string>>() // The Post-Processor layers
         );
 
         // Create a new object
