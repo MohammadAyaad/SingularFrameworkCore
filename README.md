@@ -117,43 +117,83 @@ public Singular(
 ```
 ### Argumets : 
 1- `ISingularCrudRepository<O> repository` is the `storage`
+
 2- `IEntitySerializer<I, O> serializer` is the serialization unit from type`I` to `O`
-3- `List<IDataProcessorLayer<I>> preProcessors` is a list of all Pre-Serialization Processing layers.
 
-### 3. Perform CRUD Operations
+3- `List<IDataProcessorLayer<I>> preProcessors` is a list of all Pre-Serialization processing layers.
 
-#### **Create**
-Create and store an object.
+4- `List<IDataProcessorLayer<O>> postProcessors` is a list of all Post-Serialization processing layers
 
-```csharp
-singular.Create(myObject);
-```
+Creating an instance of the `Singular` Would require fulfilling these parameters which do not have an internal implementation in this library, you could use any third-party integration , implement your own or check out some other integrations that are made.
 
-#### **Read**
-Retrieve the stored object.
+### 3. Use it
+Just as simple as that you can use it directly after completing the previous steps.
 
-```csharp
-var myObject = singular.Read();
-```
-
-#### **Update**
-Update the stored object.
+## Full Example :
+a simple Repository for a file on the file system : 
 
 ```csharp
-singular.Update(updatedObject);
+using System.IO;
+using SingularFrameworkCore.Repository;
+
+public class TextFileRepository : ISingularCrudRepository<string>
+{
+    public string Path { get; }
+
+    public TextFileRepository(string path)
+    {
+        this.Path = path;
+    }
+
+    public async Task Create(string entity)
+    {
+        if (!File.Exists(this.Path))
+        {
+            File.Create(this.Path);
+            await File.WriteAllTextAsync(this.Path, entity);
+        }
+        else
+            throw new InvalidOperationException("File already exists");
+    }
+
+    public Task Delete()
+    {
+        if (File.Exists(this.Path))
+            File.Delete(this.Path);
+        return Task.CompletedTask;
+    }
+
+    public Task<string> Read()
+    {
+        return File.ReadAllTextAsync(this.Path);
+    }
+
+    public Task Update(string newEntity)
+    {
+        return File.WriteAllTextAsync(this.Path, newEntity);
+    }
+}
 ```
-
-#### **Delete**
-Remove the stored object.
-
+a simple Newtonsoft.Json based serializer
 ```csharp
-singular.Delete();
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using SingularFrameworkCore.Serialization;
+
+class NewtonsoftJsonStringSerializer<T> : IEntitySerializer<T, string>
+{
+    public string Serialize(T entity)
+    {
+        return JObject.FromObject(entity!).ToString();
+    }
+
+    public T Deserialize(string json)
+    {
+        return JObject.Parse(json).ToObject<T>()!;
+    }
+}
 ```
-
-### Example Usage
-
-Here is a complete example of how to use the `Singular<T, U>` class:
-
+A simple program using our implementations :
 ```csharp
 using SingularFrameworkCore;
 
@@ -163,12 +203,20 @@ public class MyClass
     public int Age { get; set; }
 }
 
+public 
+
 class Program
 {
+    static Singular<MyClass,string>
     static void Main()
     {
         // Create an instance of Singular for MyClass objects stored as strings
-        var singular = new Singular<MyClass, string>();
+        var singular = new Singular<MyClass, string>(
+            new TextFileRepository("test.json"),
+            new NewtonsoftJsonStringSerializer<MyClass>(),
+            new List<IDataProcessorLayer<MyClass>>(),
+            new List<IDataProcessorLayer<string>>()
+        );
 
         // Create a new object
         var myObject = new MyClass { Name = "John", Age = 30 };
@@ -188,14 +236,24 @@ class Program
 }
 ```
 
+
 ## Contributing
 
 Contributions are welcome! Feel free to submit a pull request or open an issue for any bugs or feature requests.
 
+> **Note:** I'm not actively updating the library because there is nothing to add in my mind, if you had a feature idea that you want to add, just open an issue, otherwise don't expect regular updates to the library.
+
+> **Note:** **Please Make Sure That any feature idea, Contribution can be generified and does not require any dependencies**, trying to make this library an abstract definition to avoid coupling or dependency hell, and there will be multiple implementations using multiple methods in separate libraries.
+
+If you'd like to contribute to the library writing an implementation for any of the interfaces, Please implement it in the Convention `Author.SingularFrameworkCore.Feature.YourImplementation'sNameSpace`
+
+for example if we'd implement Newtonsoft.Json Serialization we could do :
+`MohammadAyaad.SingularFrameworkCore.Serialization.Newtonsoft.Json` and under that namespace goes a `JsonSerializer`
+
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License 2.0 License. See the [LICENSE](LICENSE) file for details.
 
 ## Feedback
 
-If you have any questions, suggestions, or feedback, please open an issue on the [GitHub repository](https://github.com/yourusername/SingularFrameworkCore).
+If you have any questions, suggestions, or feedback, please open an issue on the [GitHub repository](https://github.com/MohammadAyaad/SingularFrameworkCore).
