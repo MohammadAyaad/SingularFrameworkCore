@@ -260,7 +260,7 @@ This project is licensed under the Apache License 2.0 License. See the [LICENSE]
 If you have any questions, suggestions, or feedback, please open an issue on the [GitHub repository](https://github.com/MohammadAyaad/SingularFrameworkCore).
 
 ## Author
-###  Made by [Mohammad Ayaad](https://github.com/MohammadAyaad) ![MohammadAyaad](https://img.shields.io/static/v1?label=|&message=GitHub&color=blue&logo=github&logoColor=white)
+###  Made by [Mohammad Ayaad](https://github.com/MohammadAyaad) ![MohammadAyaad](https://img.shields.io/static/v1?label=|&message=MohammadAyaad&color=grey&logo=github&logoColor=white)
 
 ## Contributers
 None
