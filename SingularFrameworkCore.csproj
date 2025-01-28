@@ -6,7 +6,7 @@
     <Version>0.1.0-alpha</Version>
     <Authors>Mohammad Ayaad</Authors>
     <Description></Description>
-    <PackageLicenseExpression>Apache License 2.0</PackageLicenseExpression>
+    <PackageLicenseExpression>LICENSE</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/MohammadAyaad/SingularFrameworkCore</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MohammadAyaad/SingularFrameworkCore</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
