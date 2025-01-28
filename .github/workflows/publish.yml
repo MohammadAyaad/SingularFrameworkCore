@@ -1,0 +1,36 @@
+# .github/workflows/publish.yml
+name: Publish to NuGet
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - 'v*'
+    
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '8.0.x'
+    
+    - name: Restore
+      run: dotnet restore
+    
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
+    
+    - name: Pack
+      run: dotnet pack --configuration Release --no-build -o out
+    
+    - name: Push to NuGet
+      run: dotnet nuget push ./out/*.nupkg --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
