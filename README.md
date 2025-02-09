@@ -267,3 +267,5 @@ If you have any questions, suggestions, or feedback, please open an issue on the
 
 ## Contributers
 None
+
+### Please don't forget to star the repository :D
