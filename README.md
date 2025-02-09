@@ -1,3 +1,6 @@
+<img src="logo.png" alt="Logo" width="400" style="display:block; margin:auto;">
+<hr>
+
 # SingularFrameworkCore
 
 **SingularFrameworkCore** is a simple generic C# library designed for handling the storage and management of singular objects. using the `Singular<I,O>` where I is the input (your model) and O is the output (the stored format). It's based on the CRUD principles for a simple API that you can easily use to create, read, update, and delete objects of a specific type, stored in a custom format, such as a string.
