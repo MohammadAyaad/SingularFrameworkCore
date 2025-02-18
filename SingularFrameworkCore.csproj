@@ -13,11 +13,13 @@
     <PackageTags>singular;io;object;single;managing;</PackageTags>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageIcon>logo.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="/" />
     <None Include="LICENSE" Pack="true" PackagePath="/" />
+    <None Include="logo.png" Pack="true" PackagePath="/" />
   </ItemGroup>
 
 </Project>
